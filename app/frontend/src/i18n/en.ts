@@ -154,7 +154,8 @@ export const en = {
   notifBtn: "Notifications",
   settingsBtn: "Settings",
   alertNames: {
-    provider_offline: "Provider offline",
+    telemetry_lost: "No telemetry",
+    not_online: "Not online",
     service_restarted: "Service restarted",
     reward_received: "Reward received",
     monthly_report: "Monthly report",
@@ -166,7 +167,8 @@ export const en = {
     disk_space_low: "Low disk space",
   },
   triggerNames: {
-    provider_offline: "Provider stopped responding",
+    telemetry_lost: "Telemetry stopped coming in",
+    not_online: "Provider is not online",
     cpu_high: "Elevated CPU load",
     ram_high: "Elevated RAM usage",
     network_high: "Elevated network load",
@@ -174,7 +176,8 @@ export const en = {
     disk_space_low: "Disk space running low",
   },
   alertDescs: {
-    provider_offline: "Server unresponsive and provider not stable",
+    telemetry_lost: "No telemetry for over 15 minutes",
+    not_online: "Not answering network checks for over 15 minutes",
     service_restarted: "A provider service was restarted",
     reward_received: "Notification when a reward is credited",
     monthly_report: "Monthly summary of provider performance",

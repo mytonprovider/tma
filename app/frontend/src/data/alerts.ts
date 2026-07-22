@@ -6,7 +6,8 @@ interface AlertType {
 }
 
 export const ALERT_TYPES: AlertType[] = [
-  { key: "provider_offline", threshold: false },
+  { key: "telemetry_lost", threshold: false },
+  { key: "not_online", threshold: false },
   { key: "service_restarted", threshold: false },
   { key: "reward_received", threshold: false },
   { key: "monthly_report", threshold: false },

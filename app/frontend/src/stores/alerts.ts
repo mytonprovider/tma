@@ -19,6 +19,8 @@ interface AlertsState {
   setAll: (enabled: boolean, types: AlertTypeMap, thresholds: ThresholdMap) => void;
 }
 
+const persistOptions = appPersist<AlertsState>("mtp-alerts");
+
 export const useAlerts = create<AlertsState>()(
   persist(
     (set) => ({
@@ -30,6 +32,12 @@ export const useAlerts = create<AlertsState>()(
       setThreshold: (key, value) => set((state) => ({ thresholds: { ...state.thresholds, [key]: value } })),
       setAll: (enabled, types, thresholds) => set({ enabled, types, thresholds }),
     }),
-    appPersist("mtp-alerts"),
+    {
+      ...persistOptions,
+      merge: (persisted, current) => {
+        const state = persistOptions.merge!(persisted, current);
+        return { ...state, types: { ...defaultAlertTypes(), ...state.types } };
+      },
+    },
   ),
 );

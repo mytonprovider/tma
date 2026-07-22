@@ -47,7 +47,8 @@ interface OwnerData {
 }
 
 const TRIGGER_KEYS: ReadonlySet<string> = new Set([
-  "provider_offline",
+  "telemetry_lost",
+  "not_online",
   "cpu_high",
   "ram_high",
   "network_high",

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import BigInteger, Boolean, Float, String
+from sqlalchemy import BigInteger, Float, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.models._base import BaseModel, UTCDateTime
@@ -10,7 +10,6 @@ from app.utils import utcnow
 class BaseProviderModel(BaseModel):
     __abstract__ = True
 
-    is_reachable: Mapped[bool | None] = mapped_column(Boolean)
     wallet_address: Mapped[str] = mapped_column(String(64), nullable=False)
 
     cpu_load_percent: Mapped[float | None] = mapped_column(Float)
@@ -47,6 +46,7 @@ class ProviderModel(BaseProviderModel):
     pubkey: Mapped[str] = mapped_column(String(64), primary_key=True)
     updated_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow, onupdate=utcnow)
     balance_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
+    last_online_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
 
 
 class ProviderHistoryModel(BaseProviderModel):

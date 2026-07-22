@@ -157,7 +157,8 @@ export const ru: Dict = {
   notifBtn: "Уведомления",
   settingsBtn: "Настройки",
   alertNames: {
-    provider_offline: "Провайдер офлайн",
+    telemetry_lost: "Нет телеметрии",
+    not_online: "Не в сети",
     service_restarted: "Сервис перезапущен",
     reward_received: "Получена награда",
     monthly_report: "Месячный отчёт",
@@ -169,7 +170,8 @@ export const ru: Dict = {
     disk_space_low: "Мало места",
   },
   triggerNames: {
-    provider_offline: "Провайдер перестал отвечать",
+    telemetry_lost: "Телеметрия не поступает",
+    not_online: "Провайдер не в сети",
     cpu_high: "Повышенная нагрузка CPU",
     ram_high: "Повышенная загрузка RAM",
     network_high: "Повышенная нагрузка сети",
@@ -177,7 +179,8 @@ export const ru: Dict = {
     disk_space_low: "Заканчивается место на диске",
   },
   alertDescs: {
-    provider_offline: "Сервер долго не отвечает, провайдер нестабилен",
+    telemetry_lost: "Телеметрия не поступает дольше 15 минут",
+    not_online: "Не отвечает на проверки сети дольше 15 минут",
     service_restarted: "Одна из служб провайдера перезапущена",
     reward_received: "Уведомление о зачислении награды",
     monthly_report: "Ежемесячная сводка по работе провайдеров",

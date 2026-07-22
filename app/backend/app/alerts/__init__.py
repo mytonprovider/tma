@@ -1,8 +1,8 @@
 from .constants import (
     DEBOUNCE,
     DEFAULT_THRESHOLDS,
+    LOST_AGE,
     MONTHLY_REPORT_AT,
-    OFFLINE_AGE,
     RESOLVE_MARGIN,
     THRESHOLD_MAX,
     THRESHOLD_MIN,
@@ -13,8 +13,8 @@ from .rules import RULES, BaseRule, disk_space_percent, evaluate, net_load_perce
 __all__ = [
     "DEBOUNCE",
     "DEFAULT_THRESHOLDS",
+    "LOST_AGE",
     "MONTHLY_REPORT_AT",
-    "OFFLINE_AGE",
     "RESOLVE_MARGIN",
     "RULES",
     "THRESHOLD_MAX",

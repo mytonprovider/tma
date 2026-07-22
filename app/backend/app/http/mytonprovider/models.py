@@ -13,6 +13,7 @@ class Provider(BaseModel):
     address: str
     status: int | None = None
     status_ratio: float | None = None
+    last_online_check_time: int | None = None
     telemetry: dict[str, Any] | None = None
 
 

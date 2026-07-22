@@ -26,7 +26,6 @@ def upgrade() -> None:
     op.create_table('providers',
     sa.Column('pubkey', sa.String(length=64), nullable=False),
     sa.Column('updated_at', UTCDateTime(), nullable=False),
-    sa.Column('is_reachable', sa.Boolean(), nullable=True),
     sa.Column('wallet_address', sa.String(length=64), nullable=False),
     sa.Column('cpu_load_percent', sa.Float(), nullable=True),
     sa.Column('ram_load_percent', sa.Float(), nullable=True),
@@ -49,12 +48,12 @@ def upgrade() -> None:
     sa.Column('ton_storage_provider_uptime', sa.Float(), nullable=True),
     sa.Column('ton_storage_provider_githash', sa.String(length=40), nullable=True),
     sa.Column('balance_at', UTCDateTime(), nullable=True),
+    sa.Column('last_online_at', UTCDateTime(), nullable=True),
     sa.PrimaryKeyConstraint('pubkey', name=op.f('pk_providers'))
     )
     op.create_table('providers_history',
     sa.Column('pubkey', sa.String(length=64), nullable=False),
     sa.Column('archived_at', UTCDateTime(), nullable=False),
-    sa.Column('is_reachable', sa.Boolean(), nullable=True),
     sa.Column('wallet_address', sa.String(length=64), nullable=False),
     sa.Column('cpu_load_percent', sa.Float(), nullable=True),
     sa.Column('ram_load_percent', sa.Float(), nullable=True),

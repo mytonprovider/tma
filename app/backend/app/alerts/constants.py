@@ -7,7 +7,7 @@ DEBOUNCE = timedelta(minutes=10)
 THRESHOLD_MIN, THRESHOLD_MAX = 30, 100
 
 MONTHLY_REPORT_AT = time(hour=12)
-OFFLINE_AGE = timedelta(minutes=30)
+LOST_AGE = timedelta(minutes=15)
 
 DEFAULT_THRESHOLDS: dict[str, float] = {
     AlertType.CPU_HIGH.value: 90,

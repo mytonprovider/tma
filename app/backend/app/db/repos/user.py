@@ -2,7 +2,8 @@ from app.db.models import UserModel
 from app.db.repos._base import BaseRepo
 
 DEFAULT_ALERT_TYPES = [
-    "provider_offline",
+    "telemetry_lost",
+    "not_online",
     "service_restarted",
     "reward_received",
     "monthly_report",

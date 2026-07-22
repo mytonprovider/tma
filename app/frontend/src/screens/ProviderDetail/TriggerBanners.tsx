@@ -10,7 +10,8 @@ import { useSubscriptions } from "@/stores/subscriptions";
 import styles from "./ProviderDetail.module.css";
 
 const TRIGGER_GLYPH: Record<TriggerKey, GlyphName> = {
-  provider_offline: "server",
+  telemetry_lost: "bars",
+  not_online: "server",
   cpu_high: "cpu",
   ram_high: "bars",
   network_high: "globe",

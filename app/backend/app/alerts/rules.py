@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-from app.alerts.constants import DEFAULT_THRESHOLDS, OFFLINE_AGE, RESOLVE_MARGIN
+from app.alerts.constants import DEFAULT_THRESHOLDS, LOST_AGE, RESOLVE_MARGIN
 from app.alerts.enums import AlertColor, AlertType
 from app.db.models import ProviderModel
 from app.utils import utcnow
@@ -33,21 +33,31 @@ class BaseThresholdRule(BaseRule):
         return value is not None and value < thresholds[self.type.value] - RESOLVE_MARGIN
 
 
-class ProviderOffline(BaseRule):
-    type = AlertType.PROVIDER_OFFLINE
+class BaseAgeRule(BaseRule):
+    column: str
     color = AlertColor.ORANGE
 
+    def stale(self, provider: ProviderModel) -> bool | None:
+        at = getattr(provider, self.column)
+        if at is None:
+            return None
+        return bool(utcnow() - at > LOST_AGE)
+
     def triggered(self, provider: ProviderModel, thresholds: Mapping[str, float]) -> bool:
-        return self.is_offline(provider)
+        return self.stale(provider) is True
 
     def resolved(self, provider: ProviderModel, thresholds: Mapping[str, float]) -> bool:
-        return not self.is_offline(provider)
+        return self.stale(provider) is False
 
-    @staticmethod
-    def is_offline(provider: ProviderModel) -> bool:
-        if provider.telemetry_at is None or utcnow() - provider.telemetry_at <= OFFLINE_AGE:
-            return False
-        return provider.is_reachable is not True
+
+class TelemetryLost(BaseAgeRule):
+    type = AlertType.TELEMETRY_LOST
+    column = "telemetry_at"
+
+
+class NotOnline(BaseAgeRule):
+    type = AlertType.NOT_ONLINE
+    column = "last_online_at"
 
 
 class CpuHigh(BaseThresholdRule):
@@ -97,7 +107,8 @@ def evaluate(provider: ProviderModel, user_thresholds: Mapping[str, float]) -> l
 
 
 RULES: tuple[BaseRule, ...] = (
-    ProviderOffline(),
+    TelemetryLost(),
+    NotOnline(),
     CpuHigh(),
     RamHigh(),
     DiskLoadHigh(),

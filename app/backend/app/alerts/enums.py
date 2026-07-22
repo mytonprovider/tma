@@ -16,5 +16,6 @@ class AlertType(str, Enum):
     BAG_ADDED = "bag_added"
     REWARD_RECEIVED = "reward_received"
     MONTHLY_REPORT = "monthly_report"
-    PROVIDER_OFFLINE = "provider_offline"
+    TELEMETRY_LOST = "telemetry_lost"
+    NOT_ONLINE = "not_online"
     SERVICE_RESTARTED = "service_restarted"

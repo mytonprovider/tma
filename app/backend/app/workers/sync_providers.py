@@ -60,13 +60,12 @@ async def _collect_telemetry() -> dict[str, Telemetry]:
 
 
 def _provider_row(provider: Provider) -> dict[str, Any]:
-    is_reachable = provider.status == 0 and (provider.status_ratio or 0) >= 0.99
-    net_capacity_mbps = _net_capacity_mbps(provider.telemetry)
+    last_online = provider.last_online_check_time
     return {
         "pubkey": provider.pubkey.lower(),
-        "is_reachable": is_reachable,
         "wallet_address": provider.address,
-        "net_capacity_mbps": net_capacity_mbps,
+        "net_capacity_mbps": _net_capacity_mbps(provider.telemetry),
+        "last_online_at": datetime.fromtimestamp(last_online, tz=timezone.utc) if last_online else None,
         "updated_at": utcnow(),
     }
 
